@@ -79,13 +79,12 @@ function main() {
     var csvDataList = ConvertCsvToObj(WORK_DIR + "nendai.csv");
 
     var doc = app.activeDocument;
+    var csvData = csvDataList[i];
+    var layer = GetLayer(doc, "Design");
+    var nengouTextFrame = GetTextFrame(layer, "Nengou");
+    var dateTextFrame = GetTextFrame(layer, "Date");
 
     for (var i = 0; i < csvDataList.length; i++) {
-        var csvData = csvDataList[i];
-        var layer = GetLayer(doc, "Design");
-        var nengouTextFrame = GetTextFrame(layer, "Nengou");
-        var dateTextFrame = GetTextFrame(layer, "Date");
-
         nengouTextFrame.contents = csvData.name;
         dateTextFrame.contents = csvData.start_at;
         doc.saveAs(new File(SavePath(csvData.fileName)));
